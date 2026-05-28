@@ -40,14 +40,14 @@ Definir la arquitectura de referencia, identificar todos los componentes necesar
 
 | # | Actividad | Estado | Responsable |
 |---|-----------|--------|-------------|
-| T1.1 | Definición de arquitectura de referencia | ✅ Completado | Arquitecto |
-| T1.2 | Identificación de MCPs necesarios por tecnología | ✅ Completado | Arquitecto |
-| T1.3 | Identificación de Memory Banks necesarios | ✅ Completado | Arquitecto |
+| T1.1 | Definición de arquitectura de referencia | 🔲 Pendiente | Arquitecto |
+| T1.2 | Identificación de MCPs necesarios por tecnología | 🔲 Pendiente | Arquitecto |
+| T1.3 | Identificación de Memory Banks necesarios | 🔲 Pendiente | Arquitecto |
 | T1.4 | Identificación y creación de repositorios Git | 🔲 Pendiente | DevOps |
-| T1.5 | Identificación de skills.md necesarios por tecnología | ✅ Completado | Tech Leads |
-| T1.6 | Definición del modelo operacional | ✅ Completado | Arquitecto |
-| T1.7 | Definición de métricas y KPIs | ✅ Completado | Arquitecto |
-| T1.8 | Definición de riesgos | ✅ Completado | Arquitecto |
+| T1.5 | Identificación de skills.md necesarios por tecnología | 🔲 Pendiente | Tech Leads |
+| T1.6 | Definición del modelo operacional | 🔲 Pendiente | Arquitecto |
+| T1.7 | Definición de métricas y KPIs | 🔲 Pendiente | Arquitecto |
+| T1.8 | Definición de riesgos | 🔲 Pendiente | Arquitecto |
 | T1.9 | Definición de estándares de calidad para código generado | 🔲 Pendiente | Tech Leads |
 | T1.10 | Definición de roles y responsabilidades metodológicas | 🔲 Pendiente | Arquitecto + Tech Leads |
 
@@ -62,11 +62,11 @@ Definir la arquitectura de referencia, identificar todos los componentes necesar
 
 | Entregable | Estado |
 |------------|--------|
-| **Arquitectura de Referencia** (este repositorio) | ✅ Completado |
-| **Catálogo de MCPs necesarios** | ✅ Completado |
-| **Estructura de Memory Banks** | ✅ Completado |
-| **Skills.md por tecnología** | ✅ Completado |
-| **Modelo de Productividad y KPIs** | ✅ Completado |
+| **Arquitectura de Referencia** (este repositorio) | 🔲 Pendiente |
+| **Catálogo de MCPs necesarios** | 🔲 Pendiente |
+| **Estructura de Memory Banks** | 🔲 Pendiente |
+| **Skills.md por tecnología** | 🔲 Pendiente |
+| **Modelo de Productividad y KPIs** | 🔲 Pendiente |
 | **Reglas Cline v1** (`.clinerules` por tecnología) | 🔲 Pendiente |
 | **Libros Blancos v1** (uno por tecnología) | 🔲 Pendiente |
 | **Repositorios Git configurados** | 🔲 Pendiente |
@@ -76,8 +76,8 @@ Definir la arquitectura de referencia, identificar todos los componentes necesar
 | **Modelo de gobierno de adopción** | 🔲 Pendiente |
 
 ### 2.6 Criterios de Salida (Definition of Done)
-- ✅ Arquitectura de referencia aprobada por el Sponsor
-- ✅ MCPs necesarios identificados y priorizados
+- 🔲 Arquitectura de referencia aprobada por el Sponsor
+- 🔲 MCPs necesarios identificados y priorizados
 - 🔲 Repositorios Git configurados y accesibles
 - 🔲 IA Champions comprometidos por cada BAP
 - 🔲 Modelo de gobierno aprobado
