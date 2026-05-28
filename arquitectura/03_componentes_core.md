@@ -255,6 +255,13 @@ CLINE / AGENTES
 - **Capacidades**: Explorar repositorio ABAP, leer/escribir objetos de desarrollo, ejecutar transacciones, consultar datos de negocio, acceder a BTP
 - **Autenticación**: OAuth 2.0 / SAP BTP credentials
 
+> **Opciones a analizar para el MCP SAP:**
+>
+> | Opción | Descripción | Referencia |
+> |--------|-------------|------------|
+> | **ABAP Remote Filesystem** | MCP server que expone el sistema de ficheros ABAP remoto, permitiendo a Cline navegar y leer objetos ABAP directamente como si fueran archivos locales | A evaluar durante la Etapa 1 |
+> | **AWS for SAP MCP Server** | MCP server oficial de AWS para integración con sistemas SAP, con soporte para operaciones SAP a través de la infraestructura AWS | [Documentación oficial](https://docs.aws.amazon.com/mcp-sap/latest/awsforsapmcp/introduction.html) |
+
 #### MCP Microsoft
 - **Propósito**: Integración con el ecosistema Microsoft
 - **Capacidades**: Azure DevOps (work items, repos, pipelines), Microsoft Graph (usuarios, SharePoint, Teams), Azure Resource Manager
