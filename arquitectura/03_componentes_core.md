@@ -184,10 +184,8 @@ La Graph DB modela las **relaciones complejas** entre entidades del sistema: mó
 
 | Tecnología | Características | Caso de Uso Ideal |
 |------------|-----------------|-------------------|
-| **Neo4j** | Líder del mercado, Cypher query language, visualización | Grafos complejos, análisis |
-| **Amazon Neptune** | Managed, compatible con Gremlin y SPARQL | AWS, escalabilidad |
-| **ArangoDB** | Multi-modelo (grafo + documento + clave-valor) | Flexibilidad |
-| **Memgraph** | In-memory, compatible con Neo4j | Alto rendimiento |
+| **Amazon Neptune** | Managed, compatible con Gremlin y SPARQL, integración AWS nativa | AWS, escalabilidad, alta disponibilidad |
+| **IBM Context Studio** | Plataforma de gestión de contexto y conocimiento con capacidades de grafo, integración con ecosistema IBM/watsonx | Gestión de conocimiento empresarial, contexto IA, integración con herramientas IBM |
 
 ### 4.3 Modelo de Grafo
 
