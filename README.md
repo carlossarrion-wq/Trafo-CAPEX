@@ -60,7 +60,8 @@ ETAPA 1: ANÁLISIS Y EXPLORACIÓN          ETAPA 2: IMPLANTACIÓN Y DESPLIEGUE
 • Selección de herramientas              • MSFT   → Equipo piloto Microsoft
 • Diseño de integraciones                • MULE   → Equipo piloto MuleSoft
 • Plan de change management              • DARWIN → Equipo piloto Darwin
-• Formación inicial                      • Expansión progresiva al resto
+• Formación inicial                      • DELTA  → Equipo piloto Delta (Java)
+                                         • Expansión progresiva al resto
 ```
 
 ---
@@ -71,3 +72,4 @@ ETAPA 1: ANÁLISIS Y EXPLORACIÓN          ETAPA 2: IMPLANTACIÓN Y DESPLIEGUE
 - **Microsoft** — .NET, Azure, Power Platform
 - **MuleSoft** — Integración, APIs, DataWeave
 - **Darwin** — React + PHP (Desarrollo a medida)
+- **Delta** — Java (Monolito multifuncional)

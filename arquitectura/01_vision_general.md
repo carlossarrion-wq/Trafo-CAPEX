@@ -60,7 +60,7 @@ Los agentes IA asisten y proponen; los desarrolladores deciden y validan. El obj
 ✅ Implementación de Cline como agente de codificación  
 ✅ Metodología Spec Driven Development (SDD) con OpenSpec  
 ✅ Agentes especializados por fase del SDLC  
-✅ Skills por tecnología (SAP, Microsoft, MuleSoft, Darwin)  
+✅ Skills por tecnología (SAP, Microsoft, MuleSoft, Darwin, Delta)
 ✅ Memory Banks por proyecto  
 ✅ Base de conocimiento vectorial (Vector DB)  
 ✅ Base de datos de grafos (Graph DB)  
@@ -80,16 +80,16 @@ Los agentes IA asisten y proponen; los desarrolladores deciden y validan. El obj
 ## 6. Tecnologías Cubiertas
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    TECNOLOGÍAS EN ALCANCE                    │
-├──────────────┬──────────────┬──────────────┬────────────────┤
-│     SAP      │  MICROSOFT   │   MULESOFT   │    DARWIN      │
-│              │              │              │                │
-│ • ABAP       │ • .NET/C#    │ • Mule 4     │ • React        │
-│ • Fiori/UI5  │ • Azure      │ • DataWeave  │ • PHP          │
-│ • BTP        │ • Power Plat.│ • Anypoint   │ • REST APIs    │
-│ • S/4HANA    │ • SharePoint │ • MQ         │ • MySQL/PgSQL  │
-└──────────────┴──────────────┴──────────────┴────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                          TECNOLOGÍAS EN ALCANCE                               │
+├──────────────┬──────────────┬──────────────┬────────────────┬────────────────┤
+│     SAP      │  MICROSOFT   │   MULESOFT   │    DARWIN      │    DELTA       │
+│              │              │              │                │                │
+│ • ABAP       │ • .NET/C#    │ • Mule 4     │ • React        │ • Java         │
+│ • Fiori/UI5  │ • Azure      │ • DataWeave  │ • PHP          │ • Monolito     │
+│ • BTP        │ • Power Plat.│ • Anypoint   │ • REST APIs    │ • Spring       │
+│ • S/4HANA    │ • SharePoint │ • MQ         │ • MySQL/PgSQL  │ • JUnit/Mockito│
+└──────────────┴──────────────┴──────────────┴────────────────┴────────────────┘
 ```
 
 ---

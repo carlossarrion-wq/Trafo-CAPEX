@@ -237,6 +237,7 @@ El **IA Champion** es el referente de adopción del ecosistema dentro de cada eq
 | **Microsoft** | [Por definir] | 🔲 Pendiente |
 | **MuleSoft** | [Por definir] | 🔲 Pendiente |
 | **Darwin (React+PHP)** | [Por definir] | 🔲 Pendiente |
+| **Delta (Java)** | [Por definir] | 🔲 Pendiente |
 
 ---
 
