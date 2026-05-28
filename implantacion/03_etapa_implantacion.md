@@ -16,7 +16,7 @@ ETAPA 2: IMPLANTACIÓN — 3 SUB-ETAPAS
   SUB-ETAPA 2.1        SUB-ETAPA 2.2           SUB-ETAPA 2.3
   CONFIGURACIÓN        USO CONTROLADO           USO MASIVO
   
-  Semanas 1-4          Semanas 5-12             Semanas 13-18+
+  Semanas 1-2          Semanas 3-4              Semanas 5-8
   ──────────────       ──────────────────────   ──────────────────────────
   • Instalar Cline     • Uso diario por         • Uso de Prompts/
   • Configurar Git       perfiles controlados     Workflows definidos
@@ -41,7 +41,7 @@ Los **4 equipos piloto** (SAP, Microsoft, MuleSoft, Darwin) ejecutan las 3 sub-e
 Dejar el entorno técnico completamente operativo para que los developers puedan empezar a usar el ecosistema.
 
 ### 3.2 Duración
-**3-4 semanas** (en paralelo para los 4 equipos piloto)
+**2 semanas** (en paralelo para los 5 equipos piloto)
 
 ### 3.3 Actividades Técnicas
 
@@ -82,7 +82,7 @@ Dejar el entorno técnico completamente operativo para que los developers puedan
 Adopción guiada del ecosistema por **perfiles controlados** (IA Champion + 2-3 developers seleccionados), con seguimiento intensivo. El objetivo es validar el ecosistema en condiciones reales y definir los Prompts y Workflows que se usarán en el uso masivo.
 
 ### 4.2 Duración
-**6-8 semanas**
+**2 semanas**
 
 ### 4.3 Actividades Técnicas
 
@@ -134,7 +134,7 @@ Adopción guiada del ecosistema por **perfiles controlados** (IA Champion + 2-3 
 Extensión del uso al **equipo completo** con los Prompts y Workflows ya definidos y validados. El objetivo es alcanzar la **autonomía total** del equipo bajo el flujo de trabajo establecido, con medición continua de productividad.
 
 ### 5.2 Duración
-**4-6 semanas** (por equipo piloto), luego expansión al resto de equipos
+**3-4 semanas** (por equipo piloto), luego expansión al resto de equipos
 
 ### 5.3 Actividades Técnicas
 

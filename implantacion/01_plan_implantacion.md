@@ -11,7 +11,7 @@ LÍNEA DE TIEMPO DEL PROGRAMA
   Definición y Exploración   ─────────────────────────────────────────────────────────
                              2.1 Configuración    2.2 Uso Controlado    2.3 Uso Masivo
   
-  Mes 1-3                    Mes 3-4              Mes 4-6               Mes 6-12+
+  Semanas 1-3                Semanas 3-5          Semanas 5-9           Semanas 9-13+
   ──────────────────         ─────────────────    ──────────────────    ──────────────
   • Arquitectura             • Instalación        • Uso diario          • Prompts/
   • MCPs necesarios          • Configuración        perfiles              Workflows
@@ -34,7 +34,7 @@ LÍNEA DE TIEMPO DEL PROGRAMA
 Definir la arquitectura de referencia, identificar todos los componentes necesarios y preparar el modelo operacional antes de comenzar la implantación.
 
 ### 2.2 Duración Estimada
-**2-3 meses**
+**2-3 semanas**
 
 ### 2.3 Actividades — Dimensión Técnica
 
@@ -94,7 +94,7 @@ Implantar el ecosistema de forma progresiva en los equipos piloto (uno por tecno
 
 **Objetivo**: Dejar el entorno técnico completamente operativo para cada equipo piloto.
 
-**Duración estimada**: 3-4 semanas por equipo (en paralelo para los 4 pilotos)
+**Duración estimada**: 2 semanas por equipo (en paralelo para los 5 pilotos)
 
 #### Actividades Técnicas
 
@@ -127,7 +127,7 @@ Implantar el ecosistema de forma progresiva en los equipos piloto (uno por tecno
 
 **Objetivo**: Adopción guiada del ecosistema por perfiles controlados dentro del equipo, con seguimiento intensivo y definición de los Prompts y Workflows de uso.
 
-**Duración estimada**: 6-8 semanas
+**Duración estimada**: 2 semanas
 
 #### Actividades Técnicas
 
@@ -164,7 +164,7 @@ Implantar el ecosistema de forma progresiva en los equipos piloto (uno por tecno
 
 **Objetivo**: Extensión del uso al equipo completo con los Prompts y Workflows ya definidos y validados, alcanzando la autonomía total bajo el flujo de trabajo establecido.
 
-**Duración estimada**: 4-6 semanas (por equipo), luego expansión al resto
+**Duración estimada**: 3-4 semanas (por equipo), luego expansión al resto
 
 #### Actividades Técnicas
 
