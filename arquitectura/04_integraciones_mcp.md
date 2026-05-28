@@ -22,7 +22,7 @@ El **Model Context Protocol (MCP)** es un protocolo abierto que estandariza la f
    │    (SAP)    │  │  (Remedy)   │  │  (VectorDB) │
    └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
           │                │                │
-     [SAP APIs]      [Remedy REST]    [Qdrant API]
+     [SAP APIs]      [Remedy REST]    [Aurora+pgvector]
 ```
 
 ### 1.2 Tipos de Capacidades MCP
@@ -236,10 +236,16 @@ La integración con Remedy elimina el **cambio de contexto** entre el sistema de
 
 ---
 
-## 6. MCP Vector Database
+## 6. MCP Vector Database (Aurora RDS + pgvector)
 
 ### 6.1 Descripción
-Servidor MCP que proporciona acceso a la base de conocimiento semántica del proyecto, permitiendo búsquedas por similitud sobre documentación, código y especificaciones.
+Servidor MCP que proporciona acceso a la base de conocimiento semántica del proyecto, implementada sobre **Amazon Aurora PostgreSQL con la extensión pgvector**. Permite búsquedas por similitud semántica sobre documentación, código y especificaciones, combinando capacidades vectoriales con consultas SQL relacionales.
+
+### 6.2 Infraestructura
+- **Motor**: Amazon Aurora PostgreSQL (Serverless v2)
+- **Extensión**: pgvector (índices IVFFlat / HNSW)
+- **Autenticación**: IAM Authentication / Secrets Manager
+- **Red**: VPC privada, acceso desde MCP Server via endpoint Aurora
 
 ### 6.2 Herramientas (Tools)
 

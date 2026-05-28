@@ -114,7 +114,7 @@ El "cerebro" del ecosistema. Proporciona contexto y conocimiento a todos los age
 | Componente | Tecnología | Propósito |
 |------------|------------|-----------|
 | **Memory Banks** | Archivos Markdown estructurados | Contexto vivo del proyecto (decisiones, arquitectura, patrones) |
-| **Vector DB** | Qdrant / Weaviate / Pinecone | Búsqueda semántica sobre documentación y código |
+| **Vector DB** | **Aurora RDS + pgvector** ✅ | Búsqueda semántica sobre documentación y código |
 | **Graph DB** | Neo4j / Amazon Neptune | Relaciones entre entidades (módulos, dependencias, datos) |
 | **Reglas Cline** | `.clinerules` + Libros Blancos | Estándares de codificación por tecnología |
 

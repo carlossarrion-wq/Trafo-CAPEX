@@ -113,14 +113,34 @@ INICIALIZACIÓN                    MANTENIMIENTO                    CONSULTA
 ### 3.1 Descripción
 La Vector DB almacena **representaciones semánticas** (embeddings) de documentación, código, specs y otros artefactos del proyecto. Permite búsquedas por similitud semántica, no solo por palabras clave.
 
-### 3.2 Tecnologías Candidatas
+### 3.2 Tecnología Seleccionada: Aurora RDS + pgvector ✅
 
-| Tecnología | Características | Caso de Uso Ideal |
-|------------|-----------------|-------------------|
-| **Qdrant** | Open source, alto rendimiento, filtros avanzados | On-premise, control total |
-| **Weaviate** | GraphQL API, módulos de ML integrados | Búsqueda híbrida |
-| **Pinecone** | Managed service, escalabilidad automática | Cloud, sin ops |
-| **pgvector** | Extensión PostgreSQL, SQL familiar | Integración con BD existente |
+**Decisión**: Se utilizará **Amazon Aurora PostgreSQL** con la extensión **pgvector** como base de conocimiento vectorial.
+
+| Atributo | Detalle |
+|----------|---------|
+| **Motor** | Amazon Aurora PostgreSQL (Serverless v2 recomendado) |
+| **Extensión vectorial** | pgvector — búsqueda por similitud coseno, L2 y producto interno |
+| **Ventajas** | SQL familiar, integración nativa con AWS, sin infraestructura adicional, misma BD para datos relacionales y vectoriales |
+| **Escalabilidad** | Aurora Serverless v2 escala automáticamente según demanda |
+| **Alta disponibilidad** | Multi-AZ nativo en Aurora |
+| **Seguridad** | IAM authentication, VPC, encryption at rest y in transit |
+| **Índices vectoriales** | IVFFlat e HNSW soportados por pgvector |
+
+**Justificación de la elección**:
+- Reutiliza infraestructura AWS ya existente
+- Elimina la necesidad de gestionar un servicio vectorial separado
+- SQL estándar para consultas híbridas (vectorial + relacional)
+- Integración directa con el ecosistema AWS (IAM, VPC, CloudWatch)
+- Menor coste operativo al consolidar en un único servicio de BD
+
+**Otras tecnologías evaluadas** (descartadas):
+
+| Tecnología | Motivo de descarte |
+|------------|-------------------|
+| Qdrant | Requiere infraestructura adicional separada |
+| Weaviate | Mayor complejidad operativa |
+| Pinecone | Coste elevado, vendor lock-in externo |
 
 ### 3.3 Contenido Indexado
 
