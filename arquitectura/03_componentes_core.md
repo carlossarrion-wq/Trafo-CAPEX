@@ -257,10 +257,32 @@ CLINE / AGENTES
 
 > **Opciones a analizar para el MCP SAP:**
 >
-> | Opción | Descripción | Referencia |
-> |--------|-------------|------------|
-> | **ABAP Remote Filesystem** | MCP server que expone el sistema de ficheros ABAP remoto, permitiendo a Cline navegar y leer objetos ABAP directamente como si fueran archivos locales | A evaluar durante la Etapa 1 |
-> | **AWS for SAP MCP Server** | MCP server oficial de AWS para integración con sistemas SAP, con soporte para operaciones SAP a través de la infraestructura AWS | [Documentación oficial](https://docs.aws.amazon.com/mcp-sap/latest/awsforsapmcp/introduction.html) |
+> #### 🔷 Opción A: ABAP Remote Filesystem
+>
+> MCP server que expone el sistema de ficheros ABAP remoto directamente en VS Code, permitiendo a Cline navegar y operar sobre objetos ABAP como si fueran archivos locales. Proporciona **39 herramientas especializadas** organizadas en 12 categorías:
+>
+> | Categoría | Herramientas | Descripción |
+> |-----------|-------------|-------------|
+> | **1. Búsqueda y Descubrimiento** | `search_abap_objects` | Busca objetos ABAP por patrones con wildcards (clases, programas, FMs, tablas...) |
+> | **2. Lectura de Código** | `get_abap_object_lines`, `get_batch_lines`, `search_abap_object_lines` | Lee código fuente completo, múltiples objetos a la vez, búsqueda de texto/regex dentro del código |
+> | **3. Análisis y Metadatos** | `get_abap_object_info`, `find_where_used`, `get_sap_system_info` | Metadatos del objeto, análisis de dónde se usa (impacto de cambios), info del sistema SAP |
+> | **4. Testing y Calidad** | `run_unit_tests`, `create_test_include`, `run_atc_analysis`, `get_atc_decorations` | Ejecuta ABAP Unit tests, crea test includes, análisis ATC (Clean ABAP, performance, seguridad) |
+> | **5. Creación y Modificación** | `create_object_programmatically`, `manage_text_elements` | Crea nuevos objetos ABAP, gestiona elementos de texto |
+> | **6. Gestión de Transportes** | `manage_transport_requests` | Info de transportes, comparación, listado de objetos en un transporte |
+> | **7. Debugging y Troubleshooting** | `analyze_abap_dumps`, `analyze_abap_traces`, `abap_debug_session`, `abap_debug_breakpoint`, `abap_debug_step`, `abap_debug_variable`, `abap_debug_stack`, `abap_debug_status` | Análisis de dumps ST22, trazas de performance, control completo del debugger |
+> | **8. Consultas de Datos** | `execute_data_query`, `get_abap_sql_syntax` | Ejecuta SELECT en tablas SAP, sintaxis ABAP SQL |
+> | **9. Visualización y Diagramas** | `create_mermaid_diagram`, `validate_mermaid_syntax`, `get_mermaid_documentation`, `detect_mermaid_diagram_type` | Genera diagramas de flujo, secuencia, clases y ER desde el código |
+> | **10. Documentación** | `create_test_documentation`, `get_version_history` | Genera documentación Word, historial de versiones y comparación de cambios |
+> | **11. Navegación y Utilidades** | `get_abap_object_url`, `get_abap_object_workspace_uri`, `open_object`, `get_object_by_uri` | URLs SAP GUI, apertura de objetos en VS Code, acceso por URI ADT |
+> | **12. Gestión de Subagentes** | `manage_subagents` | Configura subagentes IA especializados (orchestrator, code-reviewer, usage-analyzer, quality-checker...) |
+>
+> **Limitaciones a considerar:** VS Code debe estar abierto, requiere conexión SAP activa, algunas operaciones de escritura requieren interacción manual (transport dialogs).
+> 📚 [Documentación completa](https://github.com/marcellourbani/vscode_abap_remote_fs/blob/HEAD/DOCUMENTATION.md)
+>
+> #### 🔷 Opción B: AWS for SAP MCP Server
+>
+> MCP server oficial de AWS para integración con sistemas SAP, con soporte para operaciones SAP a través de la infraestructura AWS.
+> 📚 [Documentación oficial](https://docs.aws.amazon.com/mcp-sap/latest/awsforsapmcp/introduction.html)
 
 #### MCP Microsoft
 - **Propósito**: Integración con el ecosistema Microsoft
