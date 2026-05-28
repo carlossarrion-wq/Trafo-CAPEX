@@ -19,10 +19,10 @@ El **Model Context Protocol (MCP)** es un protocolo abierto que estandariza la f
           │                │                │
    ┌──────▼──────┐  ┌──────▼──────┐  ┌──────▼──────┐
    │  MCP Server │  │  MCP Server │  │  MCP Server │
-   │    (SAP)    │  │  (Remedy)   │  │  (VectorDB) │
+   │    (SAP)    │  │   (Jira)    │  │  (Microsoft)│
    └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
           │                │                │
-     [SAP APIs]      [Remedy REST]    [Aurora+pgvector]
+     [SAP APIs]      [Jira REST API]   [Azure DevOps]
 ```
 
 ### 1.2 Tipos de Capacidades MCP
@@ -35,67 +35,98 @@ El **Model Context Protocol (MCP)** es un protocolo abierto que estandariza la f
 
 ---
 
-## 2. MCP SAP
+## 2. Estado de los MCPs — Visión General
 
-### 2.1 Descripción
-Servidor MCP que proporciona acceso al ecosistema SAP, incluyendo S/4HANA, BTP y herramientas de desarrollo ABAP.
-
-### 2.2 Herramientas (Tools)
-
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `sap_search_object` | Busca objetos de desarrollo ABAP | `object_name`, `object_type`, `package` |
-| `sap_read_program` | Lee el código fuente de un programa ABAP | `program_name`, `include` |
-| `sap_read_function` | Lee el código de un módulo de función | `function_name`, `function_group` |
-| `sap_read_class` | Lee una clase ABAP | `class_name` |
-| `sap_read_table` | Lee la estructura de una tabla | `table_name` |
-| `sap_execute_report` | Ejecuta un report en modo análisis | `report_name`, `parameters` |
-| `sap_get_transport` | Obtiene info de una orden de transporte | `transport_number` |
-| `sap_list_packages` | Lista paquetes de desarrollo | `prefix`, `application_component` |
-| `sap_btp_list_apps` | Lista aplicaciones en BTP | `space`, `org` |
-| `sap_fiori_get_app` | Obtiene info de una app Fiori | `app_id` |
-| `sap_get_api_spec` | Obtiene spec de una API SAP | `api_name`, `version` |
-
-### 2.3 Recursos (Resources)
-
-| Resource | Descripción |
-|----------|-------------|
-| `sap://development-standards` | Estándares de desarrollo SAP de la organización |
-| `sap://naming-conventions` | Convenciones de naming por tipo de objeto |
-| `sap://architecture-patterns` | Patrones de arquitectura SAP aprobados |
-| `sap://transport-landscape` | Descripción del landscape de transportes |
-
-### 2.4 Casos de Uso
+La estrategia de adopción de MCPs se divide en **3 horizontes** según su disponibilidad actual:
 
 ```
-CASO 1: Cline desarrolla una nueva función ABAP
-  → sap_search_object: busca funciones similares existentes
-  → sap_read_function: lee implementaciones de referencia
-  → sap_read_table: entiende la estructura de datos
-  → Genera código siguiendo los patrones encontrados
+HORIZONTE 1 — PILOTO (Etapas 2.1 y 2.2)
+─────────────────────────────────────────────────────────────────
+  MCPs que YA EXISTEN y se pueden usar desde el primer día.
+  Requieren selección, exploración y configuración.
 
-CASO 2: Cline resuelve una incidencia SAP
-  → sap_read_program: lee el programa con el error
-  → sap_read_table: verifica la estructura de datos afectada
-  → sap_get_transport: verifica cambios recientes relacionados
-  → Propone y aplica el fix
+  ✅ MCP SAP       → ABAP Remote Filesystem (existe, hay que seleccionar y configurar)
+  ✅ MCP Microsoft → Azure DevOps MCP (existe, hay que seleccionar y configurar)
+  ✅ MCP Jira      → Jira MCP oficial (existe, hay que configurar)
+
+HORIZONTE 2 — USO MASIVO (Etapa 2.3)
+─────────────────────────────────────────────────────────────────
+  MCPs que HAY QUE CONSTRUIR en paralelo durante el piloto.
+  Se incorporan cuando estén listos y validados.
+
+  🔨 MCP Remedy    → A construir (API REST Remedy disponible)
+  🔨 MCP MuleSoft  → A construir (Anypoint Platform API disponible)
+
+HORIZONTE 3 — FUTURO (Post-piloto)
+─────────────────────────────────────────────────────────────────
+  MCPs que requieren decisiones de arquitectura adicionales
+  o cuyo acceso se resuelve mejor por otras vías.
+
+  🔲 MCP Vector DB → A construir (requiere infraestructura Aurora+pgvector)
+  🔲 MCP Graph DB  → A construir (requiere decisión de plataforma)
+  ➡️ Git/GitHub/GitLab → Acceso vía CLI del desarrollador (no MCP)
+─────────────────────────────────────────────────────────────────
 ```
 
-### 2.5 Configuración
+### Tabla Resumen de MCPs
 
+| MCP | Sistema | Estado | Horizonte | Acción |
+|-----|---------|--------|-----------|--------|
+| **MCP SAP** | SAP S/4HANA / ABAP | ✅ Existe | H1 — Piloto | Seleccionar, explorar y configurar |
+| **MCP Microsoft** | Azure DevOps | ✅ Existe | H1 — Piloto | Seleccionar, explorar y configurar |
+| **MCP Jira** | Atlassian Jira | ✅ Existe | H1 — Piloto | Configurar |
+| **MCP Remedy** | BMC Remedy / ITSM | 🔨 A construir | H2 — Uso Masivo | Construir durante el piloto |
+| **MCP MuleSoft** | Anypoint Platform | 🔨 A construir | H2 — Uso Masivo | Construir durante el piloto |
+| **MCP Vector DB** | Aurora RDS + pgvector | 🔲 A construir | H3 — Futuro | Requiere infraestructura previa |
+| **MCP Graph DB** | Neo4j / Neptune | 🔲 A construir | H3 — Futuro | Requiere decisión de plataforma |
+| **Git/GitHub/GitLab** | Repositorios Git | ➡️ Vía CLI | — | Acceso nativo por terminal del dev |
+
+---
+
+## 3. HORIZONTE 1 — MCPs Existentes (Piloto)
+
+### 3.1 MCP SAP — ABAP Remote Filesystem
+
+#### Estado: ✅ Existe — Seleccionar y configurar
+
+**Descripción**: El servidor MCP **ABAP Remote Filesystem** permite a Cline acceder al repositorio de desarrollo SAP (S/4HANA, BTP) directamente desde VS Code. Es la opción más madura disponible para SAP.
+
+**Referencia**: [ABAP Remote Filesystem MCP](https://github.com/mario-andreschak/mcp-abap-abap-adt-api)
+
+**Capacidades principales (39 herramientas en 12 categorías)**:
+
+| Categoría | Herramientas destacadas |
+|-----------|------------------------|
+| **Objetos ABAP** | Leer/escribir programas, clases, funciones, includes |
+| **Navegación** | Buscar objetos, listar paquetes, explorar jerarquías |
+| **Transportes** | Crear órdenes, añadir objetos, gestionar releases |
+| **Activación** | Activar objetos de desarrollo |
+| **Syntax Check** | Verificar sintaxis ABAP antes de activar |
+| **Unit Tests** | Ejecutar tests ABAP Unit |
+| **Code Completion** | Sugerencias de código en contexto SAP |
+| **Where-Used** | Encontrar usos de un objeto en el sistema |
+| **Documentación** | Leer/escribir documentación de objetos |
+| **BTP/Fiori** | Acceso a apps Fiori y servicios BTP |
+
+**Alternativa evaluada**: AWS for SAP MCP Server (https://docs.aws.amazon.com/mcp-sap/latest/awsforsapmcp/introduction.html)
+
+**Acción requerida en Etapa 1**:
+- [ ] Evaluar y seleccionar entre ABAP Remote Filesystem y AWS for SAP MCP
+- [ ] Probar conectividad con el sistema SAP del equipo piloto
+- [ ] Documentar configuración específica del entorno
+
+**Configuración base**:
 ```json
 {
   "mcpServers": {
-    "sap": {
+    "abap-remote-filesystem": {
       "command": "node",
-      "args": ["./mcp-servers/sap/index.js"],
+      "args": ["./mcp-servers/abap-remote-filesystem/index.js"],
       "env": {
         "SAP_HOST": "${SAP_HOST}",
         "SAP_CLIENT": "${SAP_CLIENT}",
         "SAP_USER": "${SAP_USER}",
-        "SAP_PASSWORD": "${SAP_PASSWORD}",
-        "BTP_CLIENT_ID": "${BTP_CLIENT_ID}",
-        "BTP_CLIENT_SECRET": "${BTP_CLIENT_SECRET}"
+        "SAP_PASSWORD": "${SAP_PASSWORD}"
       }
     }
   }
@@ -104,185 +135,288 @@ CASO 2: Cline resuelve una incidencia SAP
 
 ---
 
-## 3. MCP Microsoft
+### 3.2 MCP Microsoft — Azure DevOps
 
-### 3.1 Descripción
-Servidor MCP que integra el ecosistema Microsoft: Azure DevOps, Microsoft Graph API, Azure Resource Manager y Power Platform.
+#### Estado: ✅ Existe — Seleccionar y configurar
 
-### 3.2 Herramientas (Tools)
+**Descripción**: Existen varios servidores MCP para el ecosistema Microsoft. El más relevante para el equipo piloto es el **Azure DevOps MCP**, que permite acceder a work items, repositorios y pipelines.
 
-#### Azure DevOps
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `ado_get_workitem` | Obtiene un work item por ID | `id`, `project` |
-| `ado_search_workitems` | Busca work items por criterios | `query`, `project`, `type` |
-| `ado_create_workitem` | Crea un nuevo work item | `type`, `title`, `description`, `project` |
-| `ado_get_repo` | Obtiene info de un repositorio | `repo_name`, `project` |
-| `ado_get_file` | Lee un archivo del repositorio | `repo`, `path`, `branch` |
-| `ado_list_pipelines` | Lista pipelines de CI/CD | `project`, `folder` |
-| `ado_get_pipeline_run` | Obtiene resultado de una ejecución | `pipeline_id`, `run_id` |
+**Opciones disponibles**:
+- [Azure DevOps MCP Server](https://github.com/microsoft/azure-devops-mcp) — Oficial Microsoft
+- [Microsoft Graph MCP](https://github.com/microsoftgraph/msgraph-mcp) — Para SharePoint, Teams, usuarios
 
-#### Microsoft Graph
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `graph_get_user` | Obtiene info de un usuario | `user_id_or_email` |
-| `graph_search_sharepoint` | Busca en SharePoint | `query`, `site_id` |
-| `graph_get_teams_channel` | Obtiene mensajes de un canal Teams | `team_id`, `channel_id` |
+**Capacidades principales**:
 
-### 3.3 Casos de Uso
+| Área | Capacidades |
+|------|-------------|
+| **Work Items** | Leer, crear, actualizar historias, bugs, tareas |
+| **Repositorios** | Leer archivos, listar ramas, ver commits |
+| **Pipelines** | Ver estado de builds y releases |
+| **Boards** | Consultar sprints y backlogs |
+| **Pull Requests** | Ver y comentar PRs |
 
-```
-CASO 1: Cline trabaja en una historia de usuario
-  → ado_get_workitem: obtiene los criterios de aceptación
-  → ado_get_file: lee el código existente relacionado
-  → Implementa la funcionalidad según los criterios
-  → ado_create_workitem: crea sub-tareas si es necesario
+**Acción requerida en Etapa 1**:
+- [ ] Seleccionar el MCP más adecuado para el equipo piloto Microsoft
+- [ ] Configurar autenticación (PAT o Service Principal)
+- [ ] Validar acceso a los proyectos del equipo piloto
 
-CASO 2: Cline investiga un bug reportado
-  → ado_search_workitems: busca bugs similares resueltos
-  → ado_get_pipeline_run: verifica si hay fallos en CI/CD
-  → graph_search_sharepoint: busca documentación relacionada
-```
-
----
-
-## 4. MCP MuleSoft
-
-### 4.1 Descripción
-Servidor MCP que proporciona acceso a Anypoint Platform para gestión de APIs, integraciones y deployments MuleSoft.
-
-### 4.2 Herramientas (Tools)
-
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `mule_list_apis` | Lista APIs en Anypoint Exchange | `organization`, `search_term` |
-| `mule_get_api_spec` | Obtiene la spec RAML/OAS de una API | `api_id`, `version` |
-| `mule_get_flow` | Obtiene el XML de un flow Mule | `app_name`, `flow_name` |
-| `mule_list_connectors` | Lista conectores disponibles | `category`, `search_term` |
-| `mule_get_deployment` | Obtiene info de un deployment | `app_name`, `environment` |
-| `mule_list_environments` | Lista entornos disponibles | `organization` |
-| `mule_get_app_logs` | Obtiene logs de una aplicación | `app_name`, `environment`, `lines` |
-| `mule_search_exchange` | Busca assets en Exchange | `query`, `type` |
-
-### 4.3 Casos de Uso
-
-```
-CASO 1: Cline desarrolla una nueva integración
-  → mule_list_apis: busca APIs existentes que puede reutilizar
-  → mule_get_api_spec: lee los contratos de las APIs a integrar
-  → mule_list_connectors: verifica conectores disponibles
-  → Genera el flow Mule siguiendo los patrones del libro blanco
-
-CASO 2: Cline diagnostica un error en producción
-  → mule_get_app_logs: obtiene los logs del error
-  → mule_get_flow: lee el flow afectado
-  → mule_get_deployment: verifica la versión desplegada
-  → Propone el fix
+**Configuración base**:
+```json
+{
+  "mcpServers": {
+    "azure-devops": {
+      "command": "node",
+      "args": ["./mcp-servers/azure-devops/index.js"],
+      "env": {
+        "AZURE_DEVOPS_ORG": "${ADO_ORG}",
+        "AZURE_DEVOPS_PAT": "${ADO_PAT}"
+      }
+    }
+  }
+}
 ```
 
 ---
 
-## 5. MCP Remedy
+### 3.3 MCP Jira
 
-### 5.1 Descripción
-Servidor MCP que integra BMC Remedy (o equivalente ITSM) para acceso a tickets, incidencias, cambios y problemas directamente desde el entorno de desarrollo.
+#### Estado: ✅ Existe — Configurar
 
-### 5.2 Herramientas (Tools)
+**Descripción**: Existe un servidor MCP oficial para Jira que permite a Cline acceder a proyectos, issues, sprints y comentarios directamente desde el IDE.
 
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `remedy_get_ticket` | Obtiene detalle completo de un ticket | `ticket_id` |
-| `remedy_search_tickets` | Busca tickets por criterios | `query`, `status`, `priority`, `assignee` |
-| `remedy_get_incident` | Obtiene una incidencia | `incident_id` |
-| `remedy_search_incidents` | Busca incidencias | `query`, `status`, `category`, `date_from` |
-| `remedy_get_change` | Obtiene una solicitud de cambio | `change_id` |
-| `remedy_create_worklog` | Añade una nota de trabajo | `ticket_id`, `notes`, `time_spent` |
-| `remedy_update_status` | Actualiza el estado de un ticket | `ticket_id`, `status`, `notes` |
-| `remedy_get_problem` | Obtiene un registro de problema | `problem_id` |
-| `remedy_search_known_errors` | Busca errores conocidos | `query`, `category` |
-| `remedy_get_sla` | Obtiene info de SLA de un ticket | `ticket_id` |
+**Referencia**: [Atlassian Jira MCP](https://github.com/atlassian/mcp-atlassian) o equivalente comunitario
 
-### 5.3 Recursos (Resources)
+**Capacidades principales**:
 
-| Resource | Descripción |
-|----------|-------------|
-| `remedy://my-tickets` | Tickets asignados al usuario actual |
-| `remedy://team-tickets` | Tickets del equipo |
-| `remedy://open-incidents` | Incidencias abiertas del sistema |
+| Tool | Descripción |
+|------|-------------|
+| `jira_get_issue` | Obtiene detalle completo de un issue |
+| `jira_search_issues` | Busca issues por JQL |
+| `jira_create_issue` | Crea un nuevo issue |
+| `jira_update_issue` | Actualiza campos de un issue |
+| `jira_add_comment` | Añade un comentario |
+| `jira_get_sprint` | Obtiene el sprint activo |
+| `jira_list_projects` | Lista proyectos disponibles |
+| `jira_get_board` | Obtiene el tablero del equipo |
+| `jira_transition_issue` | Cambia el estado de un issue |
+| `jira_get_attachments` | Obtiene adjuntos de un issue |
 
-### 5.4 Casos de Uso
-
+**Casos de uso**:
 ```
-CASO 1: Developer trabaja en una incidencia
-  → remedy_get_incident: obtiene descripción completa del problema
-  → remedy_search_known_errors: busca si hay solución conocida
-  → remedy_search_incidents: busca incidencias similares resueltas
-  → Cline implementa la solución
-  → remedy_create_worklog: registra el trabajo realizado
-  → remedy_update_status: actualiza el estado del ticket
+CASO 1: Developer trabaja en una historia Jira
+  → jira_get_issue: obtiene criterios de aceptación y descripción
+  → jira_get_sprint: verifica el contexto del sprint actual
+  → Cline implementa la funcionalidad con el contexto completo
+  → jira_add_comment: registra el progreso
 
-CASO 2: Planificación del sprint
-  → remedy_search_tickets: obtiene tickets pendientes del equipo
-  → remedy_get_sla: verifica prioridades por SLA
-  → Cline ayuda a estimar y priorizar el trabajo
+CASO 2: Resolución de bug
+  → jira_search_issues: busca bugs similares resueltos
+  → jira_get_issue: obtiene el detalle del bug reportado
+  → Cline propone y aplica el fix
+  → jira_transition_issue: mueve el issue a "In Review"
 ```
 
-### 5.5 Valor Diferencial
-La integración con Remedy elimina el **cambio de contexto** entre el sistema de tickets y el IDE. El desarrollador puede:
-- Ver el detalle del ticket sin salir de VS Code
-- Tener el contexto del problema mientras codifica
-- Registrar el trabajo directamente desde el IDE
-- Vincular automáticamente commits con tickets
+**Acción requerida en Etapa 1**:
+- [ ] Seleccionar la implementación MCP de Jira más adecuada
+- [ ] Configurar autenticación (API Token Atlassian)
+- [ ] Validar acceso a los proyectos de los equipos piloto
+
+**Configuración base**:
+```json
+{
+  "mcpServers": {
+    "jira": {
+      "command": "node",
+      "args": ["./mcp-servers/jira/index.js"],
+      "env": {
+        "JIRA_HOST": "${JIRA_HOST}",
+        "JIRA_EMAIL": "${JIRA_EMAIL}",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+      }
+    }
+  }
+}
+```
 
 ---
 
-## 6. MCP Vector Database (Aurora RDS + pgvector)
+## 4. HORIZONTE 2 — MCPs a Construir (Uso Masivo)
 
-### 6.1 Descripción
-Servidor MCP que proporciona acceso a la base de conocimiento semántica del proyecto, implementada sobre **Amazon Aurora PostgreSQL con la extensión pgvector**. Permite búsquedas por similitud semántica sobre documentación, código y especificaciones, combinando capacidades vectoriales con consultas SQL relacionales.
+Estos MCPs se construirán **en paralelo durante el piloto** (sub-etapas 2.1 y 2.2) para estar listos en la sub-etapa 2.3 (Uso Masivo).
 
-### 6.2 Infraestructura
-- **Motor**: Amazon Aurora PostgreSQL (Serverless v2)
-- **Extensión**: pgvector (índices IVFFlat / HNSW)
-- **Autenticación**: IAM Authentication / Secrets Manager
-- **Red**: VPC privada, acceso desde MCP Server via endpoint Aurora
+### 4.1 MCP Remedy
 
-### 6.2 Herramientas (Tools)
+#### Estado: 🔨 A construir — API REST disponible
 
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `vector_search` | Búsqueda semántica | `query`, `collection`, `top_k`, `filters` |
-| `vector_upsert` | Indexa documentos | `documents`, `collection` |
-| `vector_delete` | Elimina documentos | `ids`, `collection` |
-| `vector_get_similar` | Encuentra documentos similares | `document_id`, `collection`, `top_k` |
-| `vector_list_collections` | Lista colecciones disponibles | — |
-| `vector_get_stats` | Estadísticas de una colección | `collection` |
+**Descripción**: BMC Remedy expone una API REST que permite construir un MCP server personalizado. No existe un MCP estándar para Remedy, por lo que hay que desarrollarlo.
 
-### 6.3 Colecciones Estándar
+**Base técnica**: Remedy REST API (disponible en la mayoría de instalaciones Remedy 9.x+)
 
-| Colección | Contenido | Actualización |
-|-----------|-----------|---------------|
-| `documentation` | Documentación técnica del sistema | Manual / CI/CD |
-| `codebase` | Fragmentos de código indexados | Automática (git hooks) |
-| `specs` | Especificaciones OpenSpec | Automática (al aprobar spec) |
-| `incidents` | Incidencias resueltas y soluciones | Automática (Remedy webhook) |
-| `memory_banks` | Contenido de los Memory Banks | Automática (al actualizar) |
+**Herramientas a implementar**:
+
+| Tool | Descripción | Endpoint Remedy |
+|------|-------------|-----------------|
+| `remedy_get_ticket` | Obtiene detalle de un ticket | `GET /api/arsys/v1/entry/{form}/{id}` |
+| `remedy_search_tickets` | Busca tickets por criterios | `GET /api/arsys/v1/entry/{form}?q=...` |
+| `remedy_get_incident` | Obtiene una incidencia | `GET /api/arsys/v1/entry/HPD:Help Desk/{id}` |
+| `remedy_search_incidents` | Busca incidencias | `GET /api/arsys/v1/entry/HPD:Help Desk?q=...` |
+| `remedy_create_worklog` | Añade nota de trabajo | `POST /api/arsys/v1/entry/HPD:WorkLog` |
+| `remedy_update_status` | Actualiza estado | `PUT /api/arsys/v1/entry/{form}/{id}` |
+| `remedy_search_known_errors` | Busca errores conocidos | `GET /api/arsys/v1/entry/PBM:Known Error?q=...` |
+| `remedy_get_sla` | Obtiene info de SLA | `GET /api/arsys/v1/entry/SLM:SLA/{id}` |
+
+**Plan de construcción**:
+```
+SPRINT 1 (Semana 1-2 del piloto)
+  → Análisis de la API REST de Remedy disponible
+  → Autenticación y conectividad básica
+  → Implementar remedy_get_incident y remedy_search_incidents
+
+SPRINT 2 (Semana 3-4 del piloto)
+  → Implementar remedy_create_worklog y remedy_update_status
+  → Implementar remedy_search_known_errors
+  → Testing y validación con datos reales
+
+SPRINT 3 (Semana 5-6 del piloto)
+  → Implementar herramientas restantes
+  → Documentación y configuración para todos los equipos
+  → Listo para Uso Masivo (sub-etapa 2.3)
+```
+
+**Valor diferencial**: Elimina el cambio de contexto entre Remedy y el IDE. El developer puede ver el ticket, codificar la solución y registrar el trabajo sin salir de VS Code.
 
 ---
 
-## 7. MCP Graph Database
+### 4.2 MCP MuleSoft
 
-### 7.1 Descripción
-Servidor MCP que proporciona acceso a la base de datos de grafos para consultas sobre relaciones entre entidades del sistema.
+#### Estado: 🔨 A construir — Anypoint Platform API disponible
 
-### 7.2 Herramientas (Tools)
+**Descripción**: MuleSoft Anypoint Platform expone APIs REST completas. No existe un MCP estándar para MuleSoft, por lo que hay que desarrollarlo usando la Anypoint Platform API.
 
-| Tool | Descripción | Parámetros |
-|------|-------------|------------|
-| `graph_query` | Ejecuta una consulta Cypher | `query`, `parameters` |
-| `graph_get_node` | Obtiene un nodo por ID | `node_id`, `node_type` |
-| `graph_get_neighbors` | Obtiene nodos relacionados | `node_id`, `relationship_type`, `depth` |
-| `graph_impact_analysis` | Analiza impacto de un cambio | `node_id`, `change_type` |
-| `graph_find_path` | Encuentra camino entre dos nodos | `from_node`, `to_node` |
-| `graph_get_dependencies` | Obtiene árbol de dependencias | `module_name`, `direction` |
-| `graph_upsert_node` | Crea o actualiza un nodo | `node_type`, `properties` |
+**Base técnica**: [Anypoint Platform API](https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/)
+
+**Herramientas a implementar**:
+
+| Tool | Descripción |
+|------|-------------|
+| `mule_list_apis` | Lista APIs en Anypoint Exchange |
+| `mule_get_api_spec` | Obtiene spec RAML/OAS de una API |
+| `mule_get_flow` | Obtiene el XML de un flow Mule |
+| `mule_list_connectors` | Lista conectores disponibles |
+| `mule_get_deployment` | Obtiene info de un deployment |
+| `mule_get_app_logs` | Obtiene logs de una aplicación |
+| `mule_search_exchange` | Busca assets en Exchange |
+
+**Plan de construcción**: Similar a Remedy, en paralelo durante el piloto.
+
+---
+
+## 5. HORIZONTE 3 — MCPs Futuros
+
+### 5.1 MCP Vector Database
+
+#### Estado: 🔲 A construir — Requiere infraestructura previa
+
+**Descripción**: Servidor MCP para búsqueda semántica sobre la base de conocimiento del proyecto. Requiere primero desplegar la infraestructura de Aurora RDS + pgvector.
+
+**Prerequisitos**:
+- Infraestructura Aurora PostgreSQL + pgvector desplegada
+- Pipeline de indexación de documentación y código
+- Decisión sobre modelo de embeddings (OpenAI, Cohere, etc.)
+
+**Herramientas previstas**:
+
+| Tool | Descripción |
+|------|-------------|
+| `vector_search` | Búsqueda semántica por query |
+| `vector_upsert` | Indexa nuevos documentos |
+| `vector_get_similar` | Encuentra documentos similares |
+| `vector_list_collections` | Lista colecciones disponibles |
+
+**Colecciones estándar previstas**:
+
+| Colección | Contenido |
+|-----------|-----------|
+| `documentation` | Documentación técnica del sistema |
+| `codebase` | Fragmentos de código indexados |
+| `specs` | Especificaciones OpenSpec |
+| `incidents` | Incidencias resueltas y soluciones |
+| `memory_banks` | Contenido de los Memory Banks |
+
+---
+
+### 5.2 MCP Graph Database
+
+#### Estado: 🔲 A construir — Requiere decisión de plataforma
+
+**Descripción**: Servidor MCP para consultas sobre relaciones entre entidades del sistema (módulos, dependencias, datos, equipos).
+
+**Prerequisitos**:
+- Decisión de plataforma: Amazon Neptune vs. IBM Context Studio vs. Neo4j
+- Modelo de datos del grafo definido
+- Pipeline de carga inicial de relaciones
+
+**Herramientas previstas**:
+
+| Tool | Descripción |
+|------|-------------|
+| `graph_query` | Ejecuta una consulta Cypher/SPARQL |
+| `graph_get_neighbors` | Obtiene nodos relacionados |
+| `graph_impact_analysis` | Analiza impacto de un cambio |
+| `graph_get_dependencies` | Obtiene árbol de dependencias |
+
+---
+
+## 6. Git / GitHub / GitLab — Acceso vía CLI
+
+#### Estrategia: ➡️ CLI del desarrollador (no MCP)
+
+**Justificación**: El acceso a repositorios Git se resuelve de forma más natural y segura a través de la **CLI nativa del desarrollador** en su máquina. Cline puede ejecutar comandos `git` directamente en el terminal del desarrollador, sin necesidad de un MCP server intermedio.
+
+**Capacidades disponibles vía CLI**:
+```bash
+# Cline puede ejecutar directamente:
+git log --oneline -20          # Ver historial de commits
+git diff HEAD~1                # Ver cambios recientes
+git blame <archivo>            # Ver autoría de líneas
+git branch -a                  # Ver ramas disponibles
+git status                     # Estado del repositorio
+gh pr list                     # Listar PRs (GitHub CLI)
+gh issue view <id>             # Ver issue de GitHub
+```
+
+**Ventajas de este enfoque**:
+- ✅ Sin configuración adicional (el developer ya tiene git configurado)
+- ✅ Usa las credenciales y permisos existentes del developer
+- ✅ Funciona con cualquier proveedor (GitHub, GitLab, Azure Repos, Bitbucket)
+- ✅ Cline tiene acceso nativo a la CLI del sistema
+
+---
+
+## 7. Hoja de Ruta de MCPs
+
+```
+ETAPA 1                    SUB-ETAPA 2.1        SUB-ETAPA 2.2        SUB-ETAPA 2.3
+Definición                 Configuración        Uso Controlado       Uso Masivo
+──────────────────         ─────────────────    ──────────────────   ──────────────────
+• Seleccionar MCP SAP      • Instalar MCP SAP   • Usar MCP SAP       • MCP Remedy listo
+• Seleccionar MCP MSFT     • Instalar MCP MSFT  • Usar MCP MSFT      • MCP Mule listo
+• Seleccionar MCP Jira     • Instalar MCP Jira  • Usar MCP Jira      • Todos H1+H2 activos
+• Planificar construcción  • Iniciar build      • Continuar build    
+  MCP Remedy y Mule          MCP Remedy y Mule    MCP Remedy y Mule  
+                           • Documentar CLI Git • Usar CLI Git       • Usar CLI Git
+```
+
+---
+
+## 8. Criterios de Selección de MCPs (Horizonte 1)
+
+Para los MCPs que ya existen pero hay que seleccionar, se evaluarán con los siguientes criterios:
+
+| Criterio | Peso | Descripción |
+|----------|------|-------------|
+| **Madurez** | 30% | Versión estable, mantenimiento activo, comunidad |
+| **Cobertura funcional** | 25% | Cubre los casos de uso prioritarios del equipo |
+| **Facilidad de configuración** | 20% | Tiempo de setup, documentación disponible |
+| **Seguridad** | 15% | Gestión de credenciales, permisos granulares |
+| **Rendimiento** | 10% | Latencia de respuesta, límites de rate |
