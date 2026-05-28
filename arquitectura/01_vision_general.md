@@ -66,7 +66,7 @@ Los agentes IA asisten y proponen; los desarrolladores deciden y validan. El obj
 ✅ Base de datos de grafos (Graph DB)  
 ✅ Integraciones MCP (Remedy, SAP, sistemas propios)  
 ✅ Reglas y estándares de Cline por tecnología  
-✅ Piloto en 4 equipos (uno por tecnología)  
+✅ Piloto en 5 equipos (uno por tecnología: SAP, Microsoft, MuleSoft, Darwin, Delta)  
 ✅ Plan de expansión progresiva  
 
 ### 5.2 Fuera de Alcance (v1)

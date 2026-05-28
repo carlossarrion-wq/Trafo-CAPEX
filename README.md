@@ -15,22 +15,24 @@ Trafo CAPEX/
 │   ├── 01_vision_general.md           ← Visión y principios del programa
 │   ├── 02_arquitectura_referencia.md  ← Arquitectura conceptual completa
 │   ├── 03_componentes_core.md         ← Descripción detallada de componentes
-│   └── 04_integraciones_mcp.md        ← Catálogo de integraciones MCP
+│   └── 04_integraciones_mcp.md        ← Catálogo de integraciones MCP (por horizontes)
 ├── metodologia/
 │   ├── 01_spec_driven_development.md  ← Metodología SDD con OpenSpec
 │   ├── 02_agentes_especializados.md   ← Catálogo de agentes y skills
 │   └── 03_memory_banks.md             ← Gestión del conocimiento por proyecto
 ├── implantacion/
 │   ├── 01_plan_implantacion.md        ← Plan de implantación por etapas
-│   ├── 02_etapa_analisis.md           ← Etapa 1: Análisis y Exploración
-│   ├── 03_etapa_implantacion.md       ← Etapa 2: Implantación y Despliegue
+│   ├── 02_etapa_analisis.md           ← Etapa 1: Definición y Exploración (2-3 semanas)
+│   ├── 03_etapa_implantacion.md       ← Etapa 2: Implantación (3 sub-etapas)
 │   └── equipos/
 │       ├── sap_piloto.md              ← Plan piloto equipo SAP
 │       ├── microsoft_piloto.md        ← Plan piloto equipo Microsoft
 │       ├── mulesoft_piloto.md         ← Plan piloto equipo MuleSoft
-│       └── darwin_piloto.md           ← Plan piloto equipo Darwin
-└── assets/
-    └── diagramas/                     ← Diagramas de arquitectura
+│       ├── darwin_piloto.md           ← Plan piloto equipo Darwin (React+PHP)
+│       └── delta_piloto.md            ← Plan piloto equipo Delta (Java)
+└── roadmap/
+    ├── 01_modelo_productividad.md     ← Modelo de medición y ROI
+    └── Trafo AMS Capex - Roadmap Adopción Cline.xlsx
 ```
 
 ---

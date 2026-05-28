@@ -11,16 +11,16 @@ La Etapa 1 tiene como objetivo **entender el estado actual** de los equipos y si
 ## 2. Fases de la Etapa 1
 
 ```
-ETAPA 1: ANÁLISIS Y EXPLORACIÓN (2-3 meses)
+ETAPA 1: DEFINICIÓN Y EXPLORACIÓN (2-3 semanas)
 ──────────────────────────────────────────────────────────────────────
   FASE A          FASE B              FASE C            FASE D
   Assessment      Arquitectura        Preparación       Validación
   & Discovery     & Diseño            Técnica           & Go/No-Go
   
-  Semanas 1-4     Semanas 3-8         Semanas 6-10      Semana 10-12
+  Días 1-3        Días 3-10           Días 8-14         Días 13-15
   ────────────    ────────────────    ──────────────    ────────────
-  • Entrevistas   • Arq. referencia   • Entorno base    • Review final
-  • Inventario    • Diseño MCP        • MCP prototipos  • Ajustes
+  • Entrevistas   • Arq. referencia   • Selección MCPs  • Review final
+  • Inventario    • Catálogo MCPs     • Config. base    • Ajustes
   • Assessment    • Reglas Cline      • Memory Banks    • Go/No-Go
   • Benchmarking  • Libros blancos    • Formación       • Kick-off
 ──────────────────────────────────────────────────────────────────────
@@ -57,16 +57,16 @@ Obtener una fotografía completa del estado actual: procesos, herramientas, madu
 
 Para cada equipo, evaluar en escala 1-5:
 
-| Dimensión | SAP | Microsoft | MuleSoft | Darwin |
-|-----------|-----|-----------|----------|--------|
-| Uso de control de versiones | | | | |
-| Cobertura de tests automatizados | | | | |
-| Documentación técnica | | | | |
-| Prácticas de code review | | | | |
-| CI/CD automatizado | | | | |
-| Uso actual de IA | | | | |
-| Gestión del conocimiento | | | | |
-| Estandarización de procesos | | | | |
+| Dimensión | SAP | Microsoft | MuleSoft | Darwin | Delta |
+|-----------|-----|-----------|----------|--------|-------|
+| Uso de control de versiones | | | | | |
+| Cobertura de tests automatizados | | | | | |
+| Documentación técnica | | | | | |
+| Prácticas de code review | | | | | |
+| CI/CD automatizado | | | | | |
+| Uso actual de IA | | | | | |
+| Gestión del conocimiento | | | | | |
+| Estandarización de procesos | | | | | |
 
 #### A4. Identificación de Puntos de Dolor
 
@@ -97,18 +97,20 @@ Definir la arquitectura de referencia completa y diseñar todos los componentes 
 - Validación con Tech Leads y Sponsor
 - Decisiones arquitectónicas (ADRs)
 
-#### B2. Diseño de Integraciones MCP
+#### B2. Catálogo y Estrategia de MCPs
 
-Para cada MCP server a desarrollar:
+Los MCPs se organizan en 3 horizontes según su disponibilidad. Ver detalle completo en [Catálogo de Integraciones MCP](../arquitectura/04_integraciones_mcp.md).
 
-| MCP Server | Prioridad | Complejidad | Semanas |
-|------------|-----------|-------------|---------|
-| MCP Remedy | Alta | Media | 2 |
-| MCP SAP | Alta | Alta | 3 |
-| MCP Microsoft | Alta | Media | 2 |
-| MCP MuleSoft | Media | Media | 2 |
-| MCP Vector DB | Alta | Baja | 1 |
-| MCP Graph DB | Media | Media | 2 |
+| MCP Server | Estado | Horizonte | Acción en Etapa 1 |
+|------------|--------|-----------|-------------------|
+| **MCP SAP** | ✅ Existe | H1 — Piloto | Seleccionar y validar conectividad |
+| **MCP Microsoft** | ✅ Existe | H1 — Piloto | Seleccionar y validar conectividad |
+| **MCP Jira** | ✅ Existe | H1 — Piloto | Configurar autenticación |
+| **MCP Remedy** | 🔨 A construir | H2 — Uso Masivo | Diseñar, planificar construcción |
+| **MCP MuleSoft** | 🔨 A construir | H2 — Uso Masivo | Diseñar, planificar construcción |
+| **MCP Vector DB** | 🔲 A construir | H3 — Futuro | Diseñar arquitectura (Aurora+pgvector) |
+| **MCP Graph DB** | 🔲 A construir | H3 — Futuro | Decidir plataforma (Neptune/Neo4j) |
+| **Git/GitHub/GitLab** | ➡️ Vía CLI | — | Sin acción (nativo en el developer) |
 
 #### B3. Diseño de Reglas Cline por Tecnología
 
@@ -221,7 +223,7 @@ Validar que todos los componentes están listos para los pilotos y tomar la deci
 - [ ] MCP Servers críticos funcionando
 
 #### Equipos Piloto
-- [ ] 4 equipos piloto seleccionados (uno por tecnología)
+- [ ] 5 equipos piloto seleccionados (SAP, Microsoft, MuleSoft, Darwin, Delta)
 - [ ] Tech Leads comprometidos y formados
 - [ ] Capacidad de los equipos confirmada (tiempo disponible)
 - [ ] Acuerdo de métricas y KPIs firmado
@@ -257,6 +259,7 @@ Validar que todos los componentes están listos para los pilotos y tomar la deci
 | **Tech Lead Microsoft** | 30% | Assessment MSFT, reglas y libro blanco MSFT |
 | **Tech Lead MuleSoft** | 30% | Assessment Mule, reglas y libro blanco Mule |
 | **Tech Lead Darwin** | 30% | Assessment Darwin, reglas y libro blanco Darwin |
+| **Tech Lead Delta** | 30% | Assessment Delta, reglas y libro blanco Delta (Java) |
 | **DevOps Engineer** | 50% | Infraestructura, despliegue de componentes |
 | **Change Manager** | 30% | Plan de formación, comunicación |
 
@@ -264,7 +267,7 @@ Validar que todos los componentes están listos para los pilotos y tomar la deci
 
 | Componente | Opción Cloud | Opción On-Premise |
 |------------|-------------|-------------------|
-| Vector DB | Pinecone / Weaviate Cloud | Qdrant en servidor |
-| Graph DB | Neo4j Aura | Neo4j Community/Enterprise |
+| Vector DB | Amazon Aurora PostgreSQL + pgvector | Aurora Serverless v2 |
+| Graph DB | Amazon Neptune | Neo4j Community/Enterprise |
 | MCP Servers | Contenedores en cloud | Servidores locales |
 | LLM | Claude API / Azure OpenAI | Modelos locales (Ollama) |

@@ -87,8 +87,9 @@ memory-bank/
 - [ ] Formación: Cline Básico (4h)
 - [ ] Formación: Memory Banks (2h)
 - [ ] Configuración de VS Code + Cline
-- [ ] Configuración del MCP Remedy y MCP Vector DB
+- [ ] Configuración del MCP Jira (si aplica) — MCP H1 disponible
 - [ ] Primera sesión práctica: explorar codebase React + PHP con Cline
+> ⚠️ **Nota**: MCP Remedy (H2) y MCP Vector DB (H3) se incorporarán en fases posteriores del programa.
 
 #### Semana 3-4: Primeros Casos Reales
 - [ ] Usar Cline para entender un componente React complejo existente

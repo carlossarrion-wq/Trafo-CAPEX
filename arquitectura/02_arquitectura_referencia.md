@@ -30,7 +30,7 @@
 ║  │  ┌──────────────────────────────────────────────────────────────────┐  │    ║
 ║  │  │                    ★ CLINE (Agente Core) ★                       │  │    ║
 ║  │  │              Agente de Codificación Principal                    │  │    ║
-║  │  │         + Skills por Tecnología (SAP / MSFT / Mule / Darwin)    │  │    ║
+║  │  │    + Skills por Tecnología (SAP / MSFT / Mule / Darwin / Delta) │  │    ║
 ║  │  └──────────────────────────────────────────────────────────────────┘  │    ║
 ║  └─────────────────────────────────────────────────────────────────────────┘    ║
 ║                                    │                                            ║
@@ -120,16 +120,18 @@ El "cerebro" del ecosistema. Proporciona contexto y conocimiento a todos los age
 
 ### 2.4 Capa de Integración (MCP Layer)
 
-Conectores que permiten a Cline y los agentes interactuar con sistemas externos sin salir del entorno de desarrollo:
+Conectores que permiten a Cline y los agentes interactuar con sistemas externos sin salir del entorno de desarrollo. Ver detalle completo en [Catálogo de Integraciones MCP](04_integraciones_mcp.md).
 
-| MCP Server | Sistema | Capacidades |
-|------------|---------|-------------|
-| **MCP SAP** | SAP S/4HANA, BTP | Repositorio ABAP, transacciones, objetos de desarrollo |
-| **MCP Microsoft** | Azure DevOps, Graph API | Work items, repos, pipelines, SharePoint |
-| **MCP MuleSoft** | Anypoint Platform | APIs, flows, conectores, deployments |
-| **MCP Remedy** | BMC Remedy / ITSM | Tickets, incidencias, cambios, problemas |
-| **MCP Vector DB** | Vector Database | Consultas semánticas sobre knowledge base |
-| **MCP Graph DB** | Graph Database | Consultas de relaciones y dependencias |
+| MCP Server | Sistema | Estado | Horizonte |
+|------------|---------|--------|-----------|
+| **MCP SAP** | SAP S/4HANA, BTP | ✅ Existe | H1 — Piloto |
+| **MCP Microsoft** | Azure DevOps | ✅ Existe | H1 — Piloto |
+| **MCP Jira** | Atlassian Jira | ✅ Existe | H1 — Piloto |
+| **MCP Remedy** | BMC Remedy / ITSM | 🔨 A construir | H2 — Uso Masivo |
+| **MCP MuleSoft** | Anypoint Platform | 🔨 A construir | H2 — Uso Masivo |
+| **MCP Vector DB** | Aurora RDS + pgvector | 🔲 A construir | H3 — Futuro |
+| **MCP Graph DB** | Neo4j / Neptune | 🔲 A construir | H3 — Futuro |
+| **Git/GitHub/GitLab** | Repositorios Git | ➡️ Vía CLI | — |
 
 ### 2.5 Capa de Sistemas de Destino
 

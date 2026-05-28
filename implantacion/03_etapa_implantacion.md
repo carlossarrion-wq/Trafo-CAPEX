@@ -31,7 +31,7 @@ ETAPA 2: IMPLANTACIÓN — 3 SUB-ETAPAS
 ──────────────────────────────────────────────────────────────────────────────
 ```
 
-Los **4 equipos piloto** (SAP, Microsoft, MuleSoft, Darwin) ejecutan las 3 sub-etapas **en paralelo**, con soporte del Arquitecto y los IA Champions.
+Los **5 equipos piloto** (SAP, Microsoft, MuleSoft, Darwin, Delta) ejecutan las 3 sub-etapas **en paralelo**, con soporte del Arquitecto y los IA Champions.
 
 ---
 
@@ -49,7 +49,7 @@ Dejar el entorno técnico completamente operativo para que los developers puedan
 |---|-----------|---------|-------------|
 | T1 | **Instalación y configuración de Cline** | VS Code + extensión Cline + configuración de modelo LLM (Claude) en cada puesto | DevOps + Tech Lead |
 | T2 | **Configuración de accesos a repositorios Git** | Permisos de lectura/escritura al repo del proyecto para Cline | DevOps |
-| T3 | **Configuración de MCPs necesarios** | MCP Remedy + MCP de la tecnología (SAP/MSFT/Mule) + MCP Vector DB | DevOps + Arquitecto |
+| T3 | **Configuración de MCPs necesarios** | MCPs H1 disponibles: MCP SAP / MCP Microsoft / MCP Jira (según tecnología del equipo) | DevOps + Arquitecto |
 | T4 | **Configuración de Memory Banks** | Crear estructura inicial del Memory Bank del proyecto con documentación existente | Tech Lead + Arquitecto |
 | T5 | **Carga inicial de conocimiento en Vector DB** | Indexar documentación técnica existente del proyecto en Aurora + pgvector | DevOps |
 | T6 | **Configuración de reglas Cline** | Aplicar `.clinerules` de la tecnología al proyecto | Tech Lead |
@@ -66,10 +66,8 @@ Dejar el entorno técnico completamente operativo para que los developers puedan
 
 - [ ] Cline instalado y funcionando en todos los puestos del equipo
 - [ ] Conexión a repositorio Git validada
-- [ ] MCP Remedy operativo (consulta de tickets)
-- [ ] MCP de tecnología operativo (SAP/MSFT/Mule)
+- [ ] MCP H1 de la tecnología operativo (MCP SAP / MCP Microsoft / MCP Jira según equipo)
 - [ ] Memory Bank inicial creado con información del proyecto
-- [ ] Vector DB con documentación inicial indexada
 - [ ] Reglas Cline aplicadas al proyecto
 - [ ] Flujo de trabajo interno documentado y comunicado al equipo
 - [ ] IA Champion formado y listo para el uso controlado
@@ -180,7 +178,7 @@ Extensión del uso al **equipo completo** con los Prompts y Workflows ya definid
 
 ### 6.1 Modelo de Expansión por Oleadas
 
-Una vez completados los 4 pilotos y la fase de consolidación, se expande al resto de equipos:
+Una vez completados los 5 pilotos (SAP, Microsoft, MuleSoft, Darwin, Delta) y la fase de consolidación, se expande al resto de equipos:
 
 ```
 EXPANSIÓN POR OLEADAS (post-pilotos)

@@ -102,7 +102,7 @@ Implantar el ecosistema de forma progresiva en los equipos piloto (uno por tecno
 |---|-----------|-------------|
 | T2.1.1 | Instalación y configuración de Cline en los equipos de los developers | DevOps + Tech Lead |
 | T2.1.2 | Configuración de accesos a repositorios Git del proyecto | DevOps |
-| T2.1.3 | Configuración de MCPs necesarios (Remedy, SAP/MSFT/Mule, Vector DB) | DevOps + Arquitecto |
+| T2.1.3 | Configuración de MCPs H1 disponibles (MCP SAP / MCP Microsoft / MCP Jira según tecnología) | DevOps + Arquitecto |
 | T2.1.4 | Configuración de Memory Banks iniciales del proyecto | Tech Lead + Arquitecto |
 | T2.1.5 | Carga inicial de conocimiento en Vector DB (documentación existente) | DevOps + Tech Lead |
 | T2.1.6 | Configuración de reglas Cline (`.clinerules`) por tecnología | Tech Lead |

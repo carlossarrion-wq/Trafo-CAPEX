@@ -137,9 +137,9 @@ CASOS DE USO GRAPH DB EN DELTA
 - [ ] Formación: Cline Básico (4h)
 - [ ] Formación: Memory Banks (2h)
 - [ ] Configuración de VS Code + Cline
-- [ ] Configuración del MCP Remedy
-- [ ] Configuración del MCP Vector DB
-- [ ] **Indexación inicial del codebase Java en Vector DB** (tarea crítica para Delta)
+- [ ] Configuración del MCP Jira (si aplica) — MCP H1 disponible
+- [ ] **Preparación del plan de indexación del codebase Java** (para cuando Vector DB H3 esté disponible)
+> ⚠️ **Nota**: MCP Remedy (H2) y MCP Vector DB (H3) se incorporarán en fases posteriores del programa.
 - [ ] **Modelado inicial del grafo de dependencias en Graph DB** (tarea crítica para Delta)
 - [ ] Primera sesión práctica: navegar el monolito con Cline
 

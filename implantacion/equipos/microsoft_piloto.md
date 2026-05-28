@@ -116,9 +116,10 @@ memory-bank/
 - [ ] Formación: Cline Básico (4h)
 - [ ] Formación: Memory Banks (2h)
 - [ ] Configuración de VS Code + Cline en cada máquina
-- [ ] Configuración del MCP Microsoft (Azure DevOps + Graph)
-- [ ] Configuración del MCP Remedy
+- [ ] Configuración del MCP Microsoft (Azure DevOps + Graph) — MCP H1 disponible
+- [ ] Configuración del MCP Jira (si aplica) — MCP H1 disponible
 - [ ] Primera sesión práctica: explorar codebase .NET con Cline
+> ⚠️ **Nota**: MCP Remedy (H2) y MCP Vector DB (H3) se incorporarán en fases posteriores del programa.
 
 #### Semana 3-4: Primeros Casos Reales Microsoft
 - [ ] Usar Cline para entender un servicio .NET complejo existente

@@ -117,9 +117,10 @@ memory-bank/
 - [ ] Formación: Cline Básico (4h)
 - [ ] Formación: Memory Banks (2h)
 - [ ] Configuración de VS Code + Cline en cada máquina
-- [ ] Configuración del MCP SAP (conexión al sistema DEV)
-- [ ] Configuración del MCP Remedy
+- [ ] Configuración del MCP SAP (conexión al sistema DEV) — MCP H1 disponible
+- [ ] Configuración del MCP Jira (si aplica) — MCP H1 disponible
 - [ ] Primera sesión práctica: explorar código SAP existente con Cline
+> ⚠️ **Nota**: MCP Remedy (H2) y MCP Vector DB (H3) se incorporarán en fases posteriores del programa.
 
 #### Semana 3-4: Primeros Casos Reales SAP
 - [ ] Usar Cline para entender un programa ABAP complejo existente
@@ -257,23 +258,16 @@ Escenario: Nueva app Fiori para aprobación de pedidos
         "SAP_PASSWORD": "${env:SAP_DEV_PASSWORD}"
       }
     },
-    "remedy": {
+    "jira": {
       "command": "node",
-      "args": ["./mcp-servers/remedy/index.js"],
+      "args": ["./mcp-servers/jira/index.js"],
       "env": {
-        "REMEDY_HOST": "${env:REMEDY_HOST}",
-        "REMEDY_USER": "${env:REMEDY_USER}",
-        "REMEDY_PASSWORD": "${env:REMEDY_PASSWORD}"
-      }
-    },
-    "vector-db": {
-      "command": "node",
-      "args": ["./mcp-servers/vector-db/index.js"],
-      "env": {
-        "QDRANT_URL": "${env:QDRANT_URL}",
-        "QDRANT_API_KEY": "${env:QDRANT_API_KEY}"
+        "JIRA_HOST": "${env:JIRA_HOST}",
+        "JIRA_USER": "${env:JIRA_USER}",
+        "JIRA_API_TOKEN": "${env:JIRA_API_TOKEN}"
       }
     }
+    // MCP Remedy (H2) y MCP Vector DB (H3) se añadirán en fases posteriores
   }
 }
 ```
